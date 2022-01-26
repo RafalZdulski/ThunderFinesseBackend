@@ -4,6 +4,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import lombok.Getter;
 import org.bson.Document;
 
 public enum ThunderskillPlayerMongoDB {
@@ -12,7 +13,9 @@ public enum ThunderskillPlayerMongoDB {
     private MongoClient mongoClient;
     private MongoDatabase mongoDatabase;
 
+    @Getter
     private String dbName;
+    @Getter
     private String clientURI;
 
     ThunderskillPlayerMongoDB(){
