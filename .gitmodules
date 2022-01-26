@@ -1,0 +1,3 @@
+[submodule "ThunderSkillPlayer"]
+	path = ThunderSkillPlayer
+	url = https://github.com/RafalZdulski/ThunderSkillPlayer.git
