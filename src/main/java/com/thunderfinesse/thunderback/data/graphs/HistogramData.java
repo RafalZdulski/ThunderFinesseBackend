@@ -1,5 +1,6 @@
-package com.thunderfinesse.thunderback.data;
+package com.thunderfinesse.thunderback.data.graphs;
 
+import com.thunderfinesse.thunderback.data.VehicleList;
 import com.thunderfinesse.thunderback.data.enums.*;
 import lombok.Getter;
 
@@ -10,8 +11,8 @@ import java.util.stream.Collectors;
 
 public class HistogramData {
     /*
-     *  should responsibility of generating data for histograms be on server's side like now
-     *  or should it be on client side i.e. in JavaSript's scripts
+     *  generating data for histogram graphs in additional class and
+     *  doing it all in one function to minimize amount of looping by list
      */
     private VehicleType type;
 

@@ -12,8 +12,6 @@ public class VehicleList extends ArrayList<Vehicle> {
     private VehicleType type;
     @Getter
     private Mode mode;
-    @Getter @Setter
-    private HistogramData histogramData;
 
     public VehicleList(VehicleType type, Mode mode){
         this.type = type;
