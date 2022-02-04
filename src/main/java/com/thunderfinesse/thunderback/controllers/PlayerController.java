@@ -1,20 +1,13 @@
 package com.thunderfinesse.thunderback.controllers;
 
 import com.thunderfinesse.thunderback.daos.ThunderfinessePlayerDao;
-import com.thunderfinesse.thunderback.data.enums.*;
 import com.thunderfinesse.thunderback.data.graphs.GraphData;
 import com.thunderfinesse.thunderback.data.Player;
-import com.thunderfinesse.thunderback.data.graphs.HistogramData;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-
-import static com.thunderfinesse.thunderback.data.enums.Mode.ARCADE;
-import static com.thunderfinesse.thunderback.data.enums.VehicleType.Aircraft;
-import static com.thunderfinesse.thunderback.data.enums.VehicleType.GroundVehicle;
-
 
 @RestController
 @RequestMapping("/player")
@@ -69,47 +62,14 @@ public class PlayerController {
     }
 
     private GraphData[] getGraphsData(Player player) {
-        HistogramData[] histograms = new HistogramData[]{
-                new HistogramData(player.getAir_ab(), Aircraft),
-                new HistogramData(player.getGround_ab(), GroundVehicle),
-                new HistogramData(player.getAir_rb(), Aircraft),
-                new HistogramData(player.getGround_rb(), GroundVehicle),
-                new HistogramData(player.getAir_sb(), Aircraft),
-                new HistogramData(player.getGround_sb(), GroundVehicle)
-        };
-
-
-        //TODO (reconsider) maybe more and different constructors in GraphData  would be better idea than this monstrosity?
         List<GraphData> ret = new LinkedList<>();
-        int i = 0;
-        for (var mode : Mode.values())
-            for(var type : new VehicleType[]{Aircraft,GroundVehicle}) {
-                ret.add(new GraphData(mode, type, "battles", "rank", Rank.values(), histograms[i].getBattlesPerRank()));
-                ret.add(new GraphData(mode, type, "winRatio", "rank", Rank.values(), histograms[i].getWrPerRank()));
-                ret.add(new GraphData(mode, type, "kdRatio", "rank", Rank.values(), histograms[i].getKdPerRank()));
+        ret.add(new GraphData(player.getAir_ab()));
+        ret.add(new GraphData(player.getGround_ab()));
+        ret.add(new GraphData(player.getAir_rb()));
+        ret.add(new GraphData(player.getGround_rb()));
+        ret.add(new GraphData(player.getAir_sb()));
+        ret.add(new GraphData(player.getGround_sb()));
 
-                ret.add(new GraphData(mode, type, "battles", "nation", Nation.values(), histograms[i].getBattlesPerNation()));
-                ret.add(new GraphData(mode, type, "winRatio", "nation", Nation.values(), histograms[i].getWrPerNation()));
-                ret.add(new GraphData(mode, type, "kdRatio", "nation", Nation.values(), histograms[i].getKdPerNation()));
-
-                switch(type){
-                    case Aircraft -> {
-                        ret.add(new GraphData(mode, type, "battles", "class", AircraftClass.values(), histograms[i].getBattlesPerClass()));
-                        ret.add(new GraphData(mode, type, "winRatio", "class", AircraftClass.values(), histograms[i].getWrPerClass()));
-                        ret.add(new GraphData(mode, type, "kdRatio", "class", AircraftClass.values(), histograms[i].getKdPerClass()));
-                    }
-                    case GroundVehicle -> {
-                        ret.add(new GraphData(mode, type, "battles", "class", GroundVehicleClass.values(), histograms[i].getBattlesPerClass()));
-                        ret.add(new GraphData(mode, type, "winRatio", "class", GroundVehicleClass.values(), histograms[i].getWrPerClass()));
-                        ret.add(new GraphData(mode, type, "kdRatio", "class", GroundVehicleClass.values(), histograms[i].getKdPerClass()));
-                    }
-                }
-                ret.add(new GraphData(mode, type, "battles", "class", Status.values(), histograms[i].getBattlesPerStatus()));
-                ret.add(new GraphData(mode, type, "winRatio", "class", Status.values(), histograms[i].getWrPerStatus()));
-                ret.add(new GraphData(mode, type, "kdRatio", "class", Status.values(), histograms[i].getKdPerStatus()));
-
-                i++;
-            }
         return ret.toArray(new GraphData[0]);
     }
 

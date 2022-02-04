@@ -5,7 +5,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.thunderfinesse.thunderback.daos.ThunderskillPlayerDao;
 import com.thunderfinesse.thunderback.daos.WikiWarthunderDao;
-import com.thunderfinesse.thunderback.data.graphs.HistogramData;
 import com.thunderfinesse.thunderback.data.Player;
 import com.thunderfinesse.thunderback.data.Vehicle;
 import com.thunderfinesse.thunderback.data.VehicleList;

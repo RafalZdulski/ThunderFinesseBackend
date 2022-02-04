@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**@deprecated
+ * @see com.thunderfinesse.thunderback.data.graphs.GraphData
+ * */
 public class HistogramData {
     /*
      *  generating data for histogram graphs in additional class and
