@@ -26,7 +26,7 @@ public class ThunderfinessePlayerDao {
         }
     }
 
-    private boolean update(String login){
+    public boolean update(String login){
         new ThunderSkillPlayerExecutor().executeWithUpdate(login);
         thunderfinessePlayerMongoDB.createCollection(getCollectionName(login));
         return true;

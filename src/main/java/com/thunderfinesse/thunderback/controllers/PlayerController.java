@@ -1,8 +1,10 @@
 package com.thunderfinesse.thunderback.controllers;
 
 import com.thunderfinesse.thunderback.daos.ThunderfinessePlayerDao;
-import com.thunderfinesse.thunderback.data.graphs.GraphData;
+import com.thunderfinesse.thunderback.data.graphs.GameModeDetailData;
 import com.thunderfinesse.thunderback.data.Player;
+import com.thunderfinesse.thunderback.data.graphs.GameModeOverallData;
+import com.thunderfinesse.thunderback.subprograms.executors.ThunderSkillPlayerExecutor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedList;
@@ -20,13 +22,25 @@ public class PlayerController {
         return player;
     }
 
-    @GetMapping("/{login}/graphs")
-    public GraphData[] getPlayers(@PathVariable("login") String login){
-        Player player = getPlayer(login);
-        GraphData[] graphsData = getGraphsData(player);
-        return graphsData;
+    @PostMapping()
+    public boolean updatePlayer(@RequestBody String login){
+        new ThunderSkillPlayerExecutor().executeWithUpdate(login);
+        return true;
     }
 
+    @GetMapping("/{login}/graphs")
+    public GameModeDetailData[] getPlayerModeDetail(@PathVariable("login") String login){
+        Player player = getPlayer(login);
+        GameModeDetailData[] detailData = getGameModeDetailData(player);
+        return detailData;
+    }
+
+    @GetMapping("/{login}/overall")
+    public GameModeOverallData[] getPlayerModeOverall(@PathVariable("login") String login){
+        Player player = getPlayer(login);
+        GameModeOverallData[] overallData = getGameModeOverallData(player);
+        return overallData;
+    }
 
 //TODO (consider) is better to share whole Player class at /{login}/player or to share each VehicleList at /{login}/{modeStr}/{typeStr}
 
@@ -61,16 +75,26 @@ public class PlayerController {
         return player;
     }
 
-    private GraphData[] getGraphsData(Player player) {
-        List<GraphData> ret = new LinkedList<>();
-        ret.add(new GraphData(player.getAir_ab()));
-        ret.add(new GraphData(player.getGround_ab()));
-        ret.add(new GraphData(player.getAir_rb()));
-        ret.add(new GraphData(player.getGround_rb()));
-        ret.add(new GraphData(player.getAir_sb()));
-        ret.add(new GraphData(player.getGround_sb()));
+    private GameModeDetailData[] getGameModeDetailData(Player player) {
+        List<GameModeDetailData> ret = new LinkedList<>();
+        ret.add(new GameModeDetailData(player.getAir_ab()));
+        ret.add(new GameModeDetailData(player.getGround_ab()));
+        ret.add(new GameModeDetailData(player.getAir_rb()));
+        ret.add(new GameModeDetailData(player.getGround_rb()));
+        ret.add(new GameModeDetailData(player.getAir_sb()));
+        ret.add(new GameModeDetailData(player.getGround_sb()));
+        return ret.toArray(new GameModeDetailData[0]);
+    }
 
-        return ret.toArray(new GraphData[0]);
+    private GameModeOverallData[] getGameModeOverallData(Player player) {
+        List<GameModeOverallData> ret = new LinkedList<>();
+        ret.add(new GameModeOverallData(player.getAir_ab()));
+        ret.add(new GameModeOverallData(player.getGround_ab()));
+        ret.add(new GameModeOverallData(player.getAir_rb()));
+        ret.add(new GameModeOverallData(player.getGround_rb()));
+        ret.add(new GameModeOverallData(player.getAir_sb()));
+        ret.add(new GameModeOverallData(player.getGround_sb()));
+        return ret.toArray(new GameModeOverallData[0]);
     }
 
 //    private VehicleList getList(String login, Mode mode, VehicleType type) {

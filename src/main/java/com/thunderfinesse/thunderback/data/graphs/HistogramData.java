@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**@deprecated
- * @see com.thunderfinesse.thunderback.data.graphs.GraphData
+ * @see GameModeDetailData
  * */
 public class HistogramData {
     /*

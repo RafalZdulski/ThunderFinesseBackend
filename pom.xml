@@ -40,6 +40,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.10.0</version>
+        </dependency>
 
         <!--### ThunderSkillPlayer dependencies ###-->
         <!-- maybe somehow submodule pom.xml should be included/added -->
@@ -51,6 +56,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
+            <version>31.0.1-jre</version>
         </dependency>
         <!-- selenium web driver -->
         <dependency>

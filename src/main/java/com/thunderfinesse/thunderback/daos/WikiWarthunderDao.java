@@ -19,6 +19,7 @@ public class WikiWarthunderDao {
     }
 
 
+
     public void getWikiStats(Vehicle vehicle, VehicleType type) {
         MongoCollection<Document> collection = wikiWarthunderMongoDB.getCollection(getCollectionName(type));
         Bson filter = Filters.eq("_id",vehicle.get_id());
