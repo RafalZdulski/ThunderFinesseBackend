@@ -5,8 +5,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.thunderfinesse.thunderback.daos.ThunderskillPlayerDao;
 import com.thunderfinesse.thunderback.daos.WikiWarthunderDao;
-import com.thunderfinesse.thunderback.data.Player;
-import com.thunderfinesse.thunderback.data.Vehicle;
+import com.thunderfinesse.thunderback.dtos.PlayerResponse;
+import com.thunderfinesse.thunderback.data.VehicleStat;
 import com.thunderfinesse.thunderback.data.VehicleList;
 import com.thunderfinesse.thunderback.data.enums.Mode;
 import com.thunderfinesse.thunderback.data.enums.VehicleType;
@@ -16,11 +16,11 @@ import java.util.concurrent.CountDownLatch;
 
 public class PlayerControllerSubthread implements Runnable{
     private final VehicleList vehicleList;
-    private final Player player;
+    private final PlayerResponse player;
     private final CountDownLatch latch;
 
 
-    public PlayerControllerSubthread(VehicleList vehicleList, Player player, CountDownLatch latch){
+    public PlayerControllerSubthread(VehicleList vehicleList, PlayerResponse player, CountDownLatch latch){
         this.vehicleList = vehicleList;
         this.player = player;
         this.latch = latch;
@@ -42,7 +42,7 @@ public class PlayerControllerSubthread implements Runnable{
 
         while (it.hasNext()) {
             try {
-                Vehicle v = new Vehicle(Document.parse(it.next().toJson()));
+                VehicleStat v = new VehicleStat(Document.parse(it.next().toJson()));
                 wikiWarthunderDao.getWikiStats(v, type);
                 vehicleList.add(v);
             }catch (IllegalStateException e){

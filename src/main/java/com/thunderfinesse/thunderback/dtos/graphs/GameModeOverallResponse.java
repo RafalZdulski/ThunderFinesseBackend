@@ -1,11 +1,11 @@
-package com.thunderfinesse.thunderback.data.graphs;
+package com.thunderfinesse.thunderback.dtos.graphs;
 
 import com.thunderfinesse.thunderback.data.VehicleList;
 import com.thunderfinesse.thunderback.data.enums.Mode;
 import com.thunderfinesse.thunderback.data.enums.VehicleType;
 import lombok.Getter;
 
-public class GameModeOverallData {
+public class GameModeOverallResponse {
     private Mode mode;
     private VehicleType type;
 
@@ -27,7 +27,7 @@ public class GameModeOverallData {
 
     //TODO add 'efficiency' or whatever it can be called - single value for assessing skill
 
-    public GameModeOverallData(VehicleList list){
+    public GameModeOverallResponse(VehicleList list){
         mode = list.getMode();
         type = list.getType();
 

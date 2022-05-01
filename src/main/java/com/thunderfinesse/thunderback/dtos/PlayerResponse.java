@@ -1,11 +1,12 @@
-package com.thunderfinesse.thunderback.data;
+package com.thunderfinesse.thunderback.dtos;
 
+import com.thunderfinesse.thunderback.data.VehicleList;
 import com.thunderfinesse.thunderback.data.enums.Mode;
 import com.thunderfinesse.thunderback.data.enums.VehicleType;
 import lombok.Data;
 
 @Data
-public class Player {
+public class PlayerResponse {
     private String login;
 
     private VehicleList air_ab;
@@ -15,7 +16,7 @@ public class Player {
     private VehicleList ground_rb;
     private VehicleList ground_sb;
 
-    public Player(String login) {
+    public PlayerResponse(String login) {
         this.login = login;
         initLists();
     }

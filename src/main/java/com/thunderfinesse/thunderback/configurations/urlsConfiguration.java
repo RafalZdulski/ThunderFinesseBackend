@@ -6,9 +6,7 @@ public enum urlsConfiguration {
 
     THUNDERSKILL_PLAYER("https://thunderskill.com/en/stat/%login%"),
     THUNDERSKILL_PLAYER_VEHICLES("https://thunderskill.com/en/stat/%login%/vehicles/%mode-short%"),
-    THUNDERSKILL_VEHICLES("https://thunderskill.com/en/vehicles"),
-
-    WTSITE_PLAYER("https://warthunder.com/en/community/userinfo/?nick=%login%");
+    THUNDERSKILL_VEHICLES("https://thunderskill.com/en/vehicles");
 
     private String urlTemplate;
 

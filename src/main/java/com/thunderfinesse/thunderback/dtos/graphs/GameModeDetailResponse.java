@@ -1,4 +1,4 @@
-package com.thunderfinesse.thunderback.data.graphs;
+package com.thunderfinesse.thunderback.dtos.graphs;
 
 import com.thunderfinesse.thunderback.data.VehicleList;
 import com.thunderfinesse.thunderback.data.enums.*;
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import java.util.Arrays;
 
-public class GameModeDetailData {
+public class GameModeDetailResponse {
     private Mode mode;
     private VehicleType type;
 
@@ -115,7 +115,7 @@ public class GameModeDetailData {
     private heatmapElement[] killsBrNationHeatmap;
     private heatmapElement[] deathsBrNationHeatmap;
 
-    public GameModeDetailData(VehicleList list){
+    public GameModeDetailResponse(VehicleList list){
         this.mode = list.getMode();
         this.type = list.getType();
 

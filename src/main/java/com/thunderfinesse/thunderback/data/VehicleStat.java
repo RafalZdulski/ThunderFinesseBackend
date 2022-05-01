@@ -8,50 +8,32 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Vehicle {
-    @Id @Getter
-    private String _id;
-    //data from wiki
-    @Setter @Getter
-    private String name;
-    @Setter @Getter
-    private VehicleType type;
-    @Setter @Getter
-    private Status status;
-    @Setter @Getter
-    private Enum klass;
-    @Setter @Getter
-    private Nation nation;
-    @Setter @Getter
-    private Rank rank;
-    @Setter @Getter
-    private String[] battleRating;
+public class VehicleStat extends VehicleBase{
+    //data from thunderskill.com
+    @Getter
+    protected int battles;
+    @Getter
+    protected int respawns;
+    @Getter
+    protected int deaths;
+    @Getter
+    protected int victories;
+    @Getter
+    protected int defeats;
+    @Getter
+    protected int airKills;
+    @Getter
+    protected int groundKills;
+    @Getter
+    protected int allKills;
+    @Getter
+    protected double winRatio;
+    @Getter
+    protected double kdRatio;
+    @Getter
+    protected double ksRatio;
 
-    //data from thunderskill
-    @Getter
-    private int battles;
-    @Getter
-    private int respawns;
-    @Getter
-    private int deaths;
-    @Getter
-    private int victories;
-    @Getter
-    private int defeats;
-    @Getter
-    private int airKills;
-    @Getter
-    private int groundKills;
-    @Getter
-    private int allKills;
-    @Getter
-    private double winRatio;
-    @Getter
-    private double kdRatio;
-    @Getter
-    private double ksRatio;
-
-    public Vehicle(org.bson.Document document) {
+    public VehicleStat(org.bson.Document document) {
         _id = document.getString("_id");
         battles = document.getInteger("battles");
         respawns = document.getInteger("respawns");

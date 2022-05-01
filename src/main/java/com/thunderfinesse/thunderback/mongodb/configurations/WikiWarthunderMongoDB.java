@@ -16,13 +16,13 @@ public enum WikiWarthunderMongoDB {
     private String clientURI;
 
     WikiWarthunderMongoDB(){
-        setDefaultVals();
+        setDefaultValues();
 
         mongoClient = MongoClients.create(clientURI);
         mongoDatabase = mongoClient.getDatabase(dbName);
     }
 
-    private void setDefaultVals(){
+    private void setDefaultValues(){
         this.clientURI = "mongodb://localhost:27017";
         this.dbName = "tf_wiki";
     }

@@ -1,13 +1,18 @@
 package com.thunderfinesse.thunderback.daos;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
-import com.thunderfinesse.thunderback.data.Vehicle;
+import com.thunderfinesse.thunderback.data.VehicleBase;
+import com.thunderfinesse.thunderback.data.VehicleStat;
 import com.thunderfinesse.thunderback.data.enums.*;
-import com.thunderfinesse.thunderback.mongodb.configurations.ThunderskillPlayerMongoDB;
 import com.thunderfinesse.thunderback.mongodb.configurations.WikiWarthunderMongoDB;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WikiWarthunderDao {
 
@@ -18,9 +23,7 @@ public class WikiWarthunderDao {
         wikiWarthunderMongoDB = WikiWarthunderMongoDB.getInstance();
     }
 
-
-
-    public void getWikiStats(Vehicle vehicle, VehicleType type) {
+    public void getWikiStats(VehicleStat vehicle, VehicleType type) {
         MongoCollection<Document> collection = wikiWarthunderMongoDB.getCollection(getCollectionName(type));
         Bson filter = Filters.eq("_id",vehicle.get_id());
         Document document = collection.find(filter).first();
@@ -45,6 +48,14 @@ public class WikiWarthunderDao {
             case GroundVehicle -> vehicle.setKlass(GroundVehicleClass.valueOf(document.getString("class")));
             default -> throw new RuntimeException("wrong type of vehicle: " + vehicle.getType());
         }
+    }
+
+    public List<VehicleBase> getAllVehicles(){
+        MongoCollection<Document> collection = wikiWarthunderMongoDB.getCollection("all_vehicles");
+        List<VehicleBase> ret = new ArrayList<>();
+        FindIterable<Document> iterable = collection.find();
+        iterable.forEach(x -> ret.add(new VehicleBase(x)));
+        return ret;
     }
 
     private String getCollectionName(VehicleType type) {

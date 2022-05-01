@@ -3,11 +3,10 @@ package com.thunderfinesse.thunderback.data;
 import com.thunderfinesse.thunderback.data.enums.Mode;
 import com.thunderfinesse.thunderback.data.enums.VehicleType;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 
-public class VehicleList extends ArrayList<Vehicle> {
+public class VehicleList extends ArrayList<VehicleStat> {
     @Getter
     private VehicleType type;
     @Getter
@@ -17,8 +16,6 @@ public class VehicleList extends ArrayList<Vehicle> {
         this.type = type;
         this.mode = mode;
     }
-
-
 
     public int getVictories(){
         int ret = 0;
